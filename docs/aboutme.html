@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - simplyYan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+       <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6c63ff;
+            --primary-light: #8a84ff;
+            --secondary: #ff6584;
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --text: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --border: #333;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header e Avatar */
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            position: relative;
+        }
+
+        .avatar-container {
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: var(--shadow);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            cursor: pointer;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.4);
+        }
+
+        .toggle-avatar {
+            margin-top: 15px;
+            background: var(--bg-card);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .toggle-avatar:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: fadeIn 1s ease;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* Árvore de Links */
+        .links-section {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .links-title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .links-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .links-tree {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .link-item {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 20px;
+            width: 280px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .link-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .link-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .link-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .link-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .link-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+        }
+
+        .link-button:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        /* Biografia */
+        .bio-section {
+            padding: 60px 0;
+            background: var(--bg-card);
+            border-radius: 20px;
+            margin: 40px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .bio-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .bio-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .bio-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .bio-text {
+            flex: 1;
+            min-width: 300px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .bio-text p {
+            margin-bottom: 20px;
+        }
+
+        .bio-highlights {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .highlight-item {
+            background: var(--bg-dark);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .highlight-item:hover {
+            transform: translateX(10px);
+        }
+
+        .highlight-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .highlight-title i {
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .link-item {
+                width: 100%;
+                max-width: 350px;
+            }
+            
+            .bio-content {
+                flex-direction: column;
+            }
+            
+            .highlight-item:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .avatar {
+                width: 120px;
+                height: 120px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .links-title, .bio-title {
+                font-size: 1.6rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        .personal-quote {
+    margin: 40px 0;
+    padding: 25px 30px;
+    border-left: 4px solid #3dff91; /* verde menta */
+    background: rgba(61, 255, 145, 0.05);
+    color: #e5e5e5;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(61, 255, 145, 0.15);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.personal-quote:hover {
+    box-shadow: 0 0 25px rgba(61, 255, 145, 0.25);
+    transform: translateY(-2px);
+}
+
+.quote-symbol {
+    color: #3dff91;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 5px;
+}
+.pc-section {
+    background: var(--bg-card);
+    border-radius: 20px;
+    margin: 60px 0;
+    padding: 50px 30px;
+    box-shadow: var(--shadow);
+    animation: fadeIn 1s ease;
+}
+
+.pc-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 35px;
+    color: var(--primary);
+}
+
+.pc-build {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.pc-item {
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pc-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(108, 99, 255, 0.3);
+}
+
+/* ==== Playlist Section ==== */
+.playlist-section {
+    background: var(--bg-card);
+    border-radius: 20px;
+    margin: 60px 0;
+    padding: 50px 30px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    animation: fadeIn 1s ease;
+}
+
+.playlist-title {
+    font-size: 2rem;
+    color: var(--secondary);
+    margin-bottom: 25px;
+}
+
+.playlist-embed {
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(255, 101, 132, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.playlist-embed:hover {
+    box-shadow: 0 0 35px rgba(255, 101, 132, 0.4);
+}
+
+/* Donation Section */
+.donation-section {
+    background: var(--bg-card);
+    border-radius: 20px;
+    margin: 60px 0;
+    padding: 50px 30px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    animation: fadeIn 1s ease;
+}
+
+.donation-title {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 25px;
+}
+
+.donation-description {
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.donation-wallets {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.wallet {
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 500px;
+    transition: transform 0.3s ease;
+}
+
+.wallet:hover {
+    transform: translateY(-5px);
+}
+
+.wallet-title {
+    font-size: 1.3rem;
+    color: var(--secondary);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.wallet-address-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #121212;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.wallet-address {
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--text);
+    word-break: break-all;
+    margin-right: 15px;
+}
+
+.copy-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+    background: var(--primary-light);
+}
+
+/* Contact Section */
+.contact-section {
+    background: var(--bg-card);
+    border-radius: 20px;
+    margin: 60px 0;
+    padding: 50px 30px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    animation: fadeIn 1s ease;
+}
+
+.contact-title {
+    font-size: 2rem;
+    color: var(--secondary);
+    margin-bottom: 40px;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.3);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    border: 2px solid var(--primary);
+}
+
+.submit-btn:hover {
+    background: transparent;
+    color: var(--primary);
+}
+    </style>
+    <div class="container">
+        <header>
+            <div class="avatar-container">
+                <img id="avatar" src="https://avatars.githubusercontent.com/u/583231?v=4" alt="Avatar" class="avatar">
+                <button id="toggleAvatar" class="toggle-avatar">Hide Avatar</button>
+            </div>
+            <h1>simplyYan</h1>
+            <p class="tagline">Developer - Gamer - Content Creator</p>
+        </header>
+
+        <section class="links-section">
+            <h2 class="links-title">Connect With Me</h2>
+            <div class="links-tree" id="linksContainer">
+                <!-- Links serão adicionados via JavaScript -->
+            </div>
+        </section>
+
+
+<section class="pc-section">
+    <h2 class="pc-title"><i class="fas fa-desktop"></i> PC Setup</h2>
+    <div class="pc-build">
+        <div class="pc-item"><strong>Motherboard:</strong> Aorus Elite</div>
+        <div class="pc-item"><strong>CPU:</strong> AMD Ryzen 5 5600X (6-Core Processor)</div>
+        <div class="pc-item"><strong>GPU:</strong> NVIDIA RTX 5060</div>
+        <div class="pc-item"><strong>RAM:</strong> 32GB DDR4</div>
+        <div class="pc-item"><strong>Storage:</strong> 1TB SSD</div>
+        <div class="pc-item"><strong>PSU:</strong> MSI MAG 650W</div>
+        <div class="pc-item"><strong>Case:</strong> Rise Mode Galaxy</div>
+        <div class="pc-item"><strong>Monitor:</strong> PCFort T217 (80Hz overclocked)</div>
+        <div class="pc-item"><strong>Keyboard:</strong> Husky Anchorage Full Size</div>
+        <div class="pc-item"><strong>Mouse:</strong> Corsair Katar PRO</div>
+        <div class="pc-item"><strong>Headset:</strong> Havit Gamenote Fuxi-h6</div>
+    </div>
+</section>
+
+</section>
+
+<section class="contact-section">
+    <h2 class="contact-title"><i class="fas fa-paper-plane"></i> Get in Touch</h2>
+    <form action="https://formspree.io/f/mdaazgpj" method="POST" class="contact-form">
+        <div class="form-group">
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Your Message:</label>
+            <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+</section>
+
+<section class="donation-section">
+    <h2 class="donation-title"><i class="fas fa-hand-holding-usd"></i> Support My Work</h2>
+    <p class="donation-description">If you like my projects and want to support me, consider making a donation. Thank you for your support!</p>
+    <div class="donation-wallets">
+        <div class="wallet">
+            <h3 class="wallet-title"><i class="fa-brands fa-pix" style="color: #32bcad;"></i> Pix</h3>
+            <div class="wallet-address-container">
+                <p class="wallet-address">wesleyy.soaresbrehmer@gmail.com</p>
+                <button class="copy-btn" onclick="copyToClipboard('wesleyy.soaresbrehmer@gmail.com')">Copy</button>
+            </div>
+        </div>
+        <div class="wallet">
+            <h3 class="wallet-title"><i class="fab fa-bitcoin" style="color: #f7931a;"></i> Bitcoin (BTC)</h3>
+            <div class="wallet-address-container">
+                <p class="wallet-address">bc1qzxg2srr0aerx26cw8jt063ufm4r0p57ewqsz90</p>
+                <button class="copy-btn" onclick="copyToClipboard('bc1qzxg2srr0aerx26cw8jt063ufm4r0p57ewqsz90')">Copy</button>
+            </div>
+        </div>
+        <div class="wallet">
+            <h3 class="wallet-title"><i class="fab fa-ethereum" style="color: #627eea;"></i> Ethereum (ETH)</h3>
+            <div class="wallet-address-container">
+                <p class="wallet-address">0xa3b182743a186720d54022796873756e07a7f163</p>
+                <button class="copy-btn" onclick="copyToClipboard('0xa3b182743a186720d54022796873756e07a7f163')">Copy</button>
+            </div>
+        </div>
+    </div>
+</section>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">simplyYan</div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Contact</a>
+                </div>
+                <p class="copyright">&copy; <span id="current-year"></span> simplyYan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dados dos links - fácil de adicionar mais
+        const linksData = [
+            {
+                title: "Linktree",
+                description: "All my links and projects in one place",
+                url: "https://linktr.ee/yanbrehmer",
+                icon: "fas fa-link",
+                color: "#43e660"
+            },
+            {
+                title: "GitHub",
+                description: "Check out my projects and contributions",
+                url: "https://github.com/simplyYan",
+                icon: "fab fa-github",
+                color: "#6e5494"
+            },
+            {
+                title: "Steam",
+                description: "See my gaming profile and library",
+                url: "https://steamcommunity.com/id/yanbrehmer",
+                icon: "fab fa-steam",
+                color: "#66c0f4"
+            },
+            {
+                title: "Instagram",
+                description: "Follow my daily updates and moments",
+                url: "https://www.instagram.com/yanbrehmer/",
+                icon: "fab fa-instagram",
+                color: "#e1306c"
+            },
+            {
+                title: "YouTube",
+                description: "Watch my videos and gaming content",
+                url: "https://www.youtube.com/@yanbrehmer",
+                icon: "fab fa-youtube",
+                color: "#ff0000"
+            },
+            {
+                title: "Twitch",
+                description: "Watch my live streams and gameplay",
+                url: "https://www.twitch.tv/yanbrehmer",
+                icon: "fab fa-twitch",
+                color: "#9146ff"
+            },
+            {
+                title: "X (Twitter)",
+                description: "Follow me for thoughts and updates",
+                url: "https://x.com/yanbrehmer",
+                icon: "fab fa-x-twitter",
+                color: "#1da1f2"
+            },
+            {
+                title: "SoundCloud",
+                description: "Listen to my tracks and playlists",
+                url: "https://soundcloud.com/yanbrehmer",
+                icon: "fab fa-soundcloud",
+                color: "#ff5500"
+            },
+            {
+                title: "Pinterest",
+                description: "Discover inspirations and boards",
+                url: "https://br.pinterest.com/yanbrehmer/_profile/",
+                icon: "fab fa-pinterest",
+                color: "#bd081c"
+            }
+        ];
+
+        // Função para criar os elementos de link
+        function createLinkElements() {
+            const linksContainer = document.getElementById('linksContainer');
+            
+            linksData.forEach(link => {
+                const linkElement = document.createElement('div');
+                linkElement.className = 'link-item';
+                linkElement.style.animation = 'fadeIn 1s ease';
+                
+                linkElement.innerHTML = `
+                    <div class="link-icon" style="color: ${link.color}">
+                        <i class="${link.icon}"></i>
+                    </div>
+                    <h3 class="link-title">${link.title}</h3>
+                    <p class="link-description">${link.description}</p>
+                    <a href="${link.url}" target="_blank" class="link-button">Visit</a>
+                `;
+                
+                linksContainer.appendChild(linkElement);
+            });
+        }
+
+        // Função para alternar o avatar
+        function toggleAvatar() {
+            const avatar = document.getElementById('avatar');
+            const toggleButton = document.getElementById('toggleAvatar');
+            
+            if (avatar.style.display === 'none') {
+                avatar.style.display = 'block';
+                toggleButton.textContent = 'Hide Avatar';
+                avatar.classList.add('animate-pulse');
+                setTimeout(() => {
+                    avatar.classList.remove('animate-pulse');
+                }, 2000);
+            } else {
+                avatar.style.display = 'none';
+                toggleButton.textContent = 'Show Avatar';
+            }
+        }
+
+        // Adicionar efeito de digitação ao título
+        function typeWriterEffect() {
+            const title = document.querySelector('h1');
+            const text = title.textContent;
+            title.textContent = '';
+            
+            let i = 0;
+            const typing = setInterval(() => {
+                if (i < text.length) {
+                    title.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typing);
+                }
+            }, 100);
+        }
+
+        // Inicialização quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', () => {
+            createLinkElements();
+            
+            // Adicionar evento ao botão de alternar avatar
+            document.getElementById('toggleAvatar').addEventListener('click', toggleAvatar);
+
+            // Atualizar o ano no rodapé
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Aplicar efeito de digitação
+            setTimeout(typeWriterEffect, 500);
+            
+            // Adicionar animação de entrada aos elementos
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 1s ease forwards';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Observar elementos para animação ao rolar
+            document.querySelectorAll('.link-item, .bio-text, .highlight-item').forEach(el => {
+                el.style.opacity = '0';
+                observer.observe(el);
+            });
+        });
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard!');
+            }, (err) => {
+                alert('Failed to copy to clipboard.');
+            });
+        }
+    </script>
+
+</body>
+</html>
